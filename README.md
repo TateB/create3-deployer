@@ -7,14 +7,28 @@ A minimal factory that deploys contracts deterministically using Solady's `CREAT
 
 The salt is hashed with the caller address for deployment, giving each deployer its own namespace. The predicted address must be computed with the same `deployer` address that will call `deployDeterministic`.
 
-### Build and Test
+### Supported Chains
 
-Requires [Foundry](https://book.getfoundry.sh) to run.
+All supported chains have `CREATE3Deployer` deployed to `0x000000000004d4f168daE7DB3C610F408eE22F57`:
 
-```sh
-forge build
-forge test
-```
+#### Mainnet Chains
+
+- Ethereum `1`
+- Optimism `10`
+- Base `8453`
+- Arbitrum One `42161`
+- Linea `59144`
+- Scroll `534352`
+
+#### Active Testnet Chains
+
+- Holesky `17000`
+- Linea Sepolia `59141`
+- Base Sepolia `84532`
+- Arbitrum Sepolia `421614`
+- Scroll Sepolia `534351`
+- Sepolia `11155111`
+- Optimism Sepolia `11155420`
 
 ### Deploy the Factory
 
@@ -26,7 +40,16 @@ forge script script/CREATE3Deployer.s.sol:Deploy \
   --broadcast
 ```
 
-On success, the factory will be at `0x004eE012d77C5D0e67D861041D11824f51B590fb`.
+On success, the factory will be at `0x000000000004d4f168daE7DB3C610F408eE22F57`.
+
+### Build and Test
+
+Requires [Foundry](https://book.getfoundry.sh) to run.
+
+```sh
+forge build
+forge test
+```
 
 ### Acknowledgements
 

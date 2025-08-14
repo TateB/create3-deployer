@@ -11,3 +11,21 @@ solc = "0.8.26"
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
 [etherscan]
 mainnet = { key = "${ETHERSCAN_API_KEY}" }
+
+[rpc_endpoints]
+# mainnet chains
+mainnet = "https://mainnet.gateway.tenderly.co"
+optimism = "https://mainnet.optimism.io"
+base = "https://mainnet.base.org"
+arbitrum = "https://arb1.arbitrum.io/rpc"
+linea = "https://rpc.linea.build"
+scroll = "https://rpc.scroll.io"
+
+# active testnet chains
+holesky = "https://holesky.drpc.org"
+linea-sepolia = "https://rpc.sepolia.linea.build"
+base-sepolia = "https://sepolia.base.org"
+arbitrum-sepolia = "https://sepolia-rollup.arbitrum.io/rpc"
+scroll-sepolia = "https://sepolia-rpc.scroll.io"
+sepolia = "https://sepolia.drpc.org"
+optimism-sepolia = "https://sepolia.optimism.io"
