@@ -31,3 +31,4 @@ On success, the factory will be at `0x004eE012d77C5D0e67D861041D11824f51B590fb`.
 ### Acknowledgements
 
 - Uses Solady `CREATE3` library.
+- Originally based on [create3-factory](https://github.com/ZeframLou/create3-factory)
