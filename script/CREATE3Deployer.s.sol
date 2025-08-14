@@ -7,7 +7,8 @@ import {CREATE3Deployer} from "../src/CREATE3Deployer.sol";
 
 error IncorrectAddress();
 
-address constant create3DeployerAddress = 0x004eE012d77C5D0e67D861041D11824f51B590fb;
+bytes32 constant SALT = 0x5361109ca02853ca8e22046b7125306d9ec4ae4cdecc393c567b6be861df3db6;
+address constant EXPECTED_ADDRESS = 0x000000000004d4f168daE7DB3C610F408eE22F57;
 
 contract Deploy is Script {
     function run() external {
@@ -17,11 +18,11 @@ contract Deploy is Script {
         address deterministicDeployer = 0x4e59b44847b379578588920cA78FbF26c0B4956C;
 
         (bool success, bytes memory data) = deterministicDeployer.call(
-            abi.encodePacked(bytes32(0), type(CREATE3Deployer).creationCode)
+            abi.encodePacked(SALT, type(CREATE3Deployer).creationCode)
         );
 
         if (!success) revert IncorrectAddress();
-        if (address(uint160(bytes20(data))) != create3DeployerAddress)
+        if (address(uint160(bytes20(data))) != EXPECTED_ADDRESS)
             revert IncorrectAddress();
 
         vm.stopBroadcast();
