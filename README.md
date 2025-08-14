@@ -1,66 +1,33 @@
-## Foundry
+## CREATE3 Deployer
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+A minimal factory that deploys contracts deterministically using Solady's `CREATE3` library. It provides a single contract, `CREATE3Deployer`, exposing:
 
-Foundry consists of:
+- `deployDeterministic(bytes initCode, bytes32 salt) returns (address)`
+- `predictDeterministicAddress(address deployer, bytes32 salt) view returns (address)`
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+The salt is hashed with the caller address for deployment, giving each deployer its own namespace. The predicted address must be computed with the same `deployer` address that will call `deployDeterministic`.
 
-## Documentation
+### Build and Test
 
-https://book.getfoundry.sh/
+Requires [Foundry](https://book.getfoundry.sh) to run.
 
-## Usage
-
-### Build
-
-```shell
-$ forge build
+```sh
+forge build
+forge test
 ```
 
-### Test
+### Deploy the Factory
 
-```shell
-$ forge test
+Anyone can deploy the factory on any network, assuming it has the deterministic deployer already deployed at `0x4e59b44847b379578588920cA78FbF26c0B4956C`.
+
+```sh
+forge script script/CREATE3Deployer.s.sol:Deploy \
+  --rpc-url $RPC_URL \
+  --broadcast
 ```
 
-### Format
+On success, the factory will be at `0x004eE012d77C5D0e67D861041D11824f51B590fb`.
 
-```shell
-$ forge fmt
-```
+### Acknowledgements
 
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+- Uses Solady `CREATE3` library.
